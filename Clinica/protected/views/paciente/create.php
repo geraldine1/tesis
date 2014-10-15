@@ -4,12 +4,12 @@
 
 $this->breadcrumbs=array(
 	'Pacientes'=>array('index'),
-	'Create',
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List Paciente', 'url'=>array('index')),
-	array('label'=>'Manage Paciente', 'url'=>array('admin')),
+	array('label'=>'Listar Paciente', 'url'=>array('index')),
+	array('label'=>'Administrar Paciente', 'url'=>array('admin')),
 );
 ?>
 

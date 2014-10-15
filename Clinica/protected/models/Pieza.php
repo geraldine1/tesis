@@ -11,8 +11,8 @@
  *
  * The followings are the available model relations:
  * @property Cara[] $caras
+ * @property Observacion[] $observacions
  * @property Odontograma $idOdontograma
- * @property TieneTratamiento[] $tieneTratamientos
  */
 class Pieza extends CActiveRecord
 {
@@ -51,8 +51,8 @@ class Pieza extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'caras' => array(self::HAS_MANY, 'Cara', 'id_pieza'),
+			'observacions' => array(self::HAS_MANY, 'Observacion', 'id_pieza'),
 			'idOdontograma' => array(self::BELONGS_TO, 'Odontograma', 'id_odontograma'),
-			'tieneTratamientos' => array(self::HAS_MANY, 'TieneTratamiento', 'id_pieza'),
 		);
 	}
 

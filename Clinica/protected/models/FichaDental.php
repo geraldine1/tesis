@@ -88,8 +88,8 @@ class FichaDental extends CActiveRecord
 		$criteria=new CDbCriteria;
                 $criteria->with = array('paciente'); 
 		$criteria->compare('id_ficha',$this->id_ficha);
+                $criteria->compare('t.rut_paciente',$this->rut_paciente,true);
                 $criteria->compare('paciente.nombre_paciente',$this->nombre,true);
-		$criteria->compare('rut_paciente',$this->rut_paciente,true);
 		$criteria->compare('fecha_creacion',$this->fecha_creacion,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

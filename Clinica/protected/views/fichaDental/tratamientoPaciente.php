@@ -15,12 +15,13 @@ $this->widget('zii.widgets.CDetailView', array(
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'TratamientosRealizados',
-    'dataProvider' => TratamientoRealizado::model()->searchByPaciente($model->id_ficha),
-    'filter' => TratamientoRealizado::model(),
+    'dataProvider' => $modelTratamiento->searchByPaciente($model->id_ficha),
+    'filter' => $modelTratamiento,
     'columns' => array(
         'id_realizado',
         'id_ficha',
         'id_tratamiento',
+        
         'comentario',
         'valor',
         'fecha',

@@ -34,7 +34,7 @@ class TratamientoRealizadoController extends Controller {
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
+                'actions' => array('admin', 'delete', 'tratamientoPaciente', 'TratamientoCara', 'CargaDiente'),
                 'users' => array('Dentista', 'Asistente'),
             ),
             array('deny', // deny all users
@@ -68,13 +68,28 @@ class TratamientoRealizadoController extends Controller {
 
         if (isset($_POST['TratamientoRealizado'])) {
             $model->attributes = $_POST['TratamientoRealizado'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_realizado));
+            if ($model->save()) {
+                //$this->redirect(array('view', 'id' => $model->id_realizado));
+                $this->redirect(array('TratamientoCara','id' => $model->id_realizado));
+                //$this->render('TratamientoCara', array('model_tratamiento' => $model));
+            }
+        } else {
+            $this->render('create', array(
+                'model' => $model,
+            ));
         }
+    }
 
-        $this->render('create', array(
-            'model' => $model,
+    public function actionCargaDiente($pieza, $model_tratamiento) {
+        $this->render('/tieneTratamiento/agregaTratamientoCara', array(
+            'model' => $model_tratamiento,
+            'numero' => $pieza,
         ));
+    }
+
+    public function actionTratamientoCara($id) {
+        $model = $this->loadModel($id);
+        $this->render('TratamientoCara', array('model' => $model));
     }
 
     /**
@@ -162,3 +177,4 @@ class TratamientoRealizadoController extends Controller {
     }
 
 }
+

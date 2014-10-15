@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos con <span class="required">*</span> son obligatorios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 	<div class="row">
@@ -23,7 +23,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_tratamiento'); ?>
+		<?php echo $form->labelEx($model,'Tratamiento'); ?>
 		<?php echo $form->dropDownList($model,'id_tratamiento',$model->getMenuTratamientos()); ?>
 		<?php echo $form->error($model,'id_tratamiento'); ?>
 	</div>
@@ -41,13 +41,31 @@
 	</div>
         
         <div class="row">
+		<?php echo $form->labelEx($model,'fecha_inicio'); ?>
+		<?php echo $form->textField($model,'fecha_inicio'); ?>
+		<?php echo $form->error($model,'fecha_inicio'); ?>
+	</div>
+        
+        <div class="row">
+		<?php echo $form->labelEx($model,'fecha_termino'); ?>
+		<?php echo $form->textField($model,'fecha_termino'); ?>
+		<?php echo $form->error($model,'fecha_termino'); ?>
+	</div>
+        
+        <div class="row">
+		<?php echo $form->labelEx($model,'estado'); ?>
+		<?php echo $form->textField($model,'estado'); ?>
+		<?php echo $form->error($model,'estado'); ?>
+	</div>
+        
+        <div class="row">
 		<?php
                     echo $form->hiddenField($model,'fecha'); 
                 ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Añadir' : 'Madificar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

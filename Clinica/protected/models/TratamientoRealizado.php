@@ -17,6 +17,8 @@
  */
 class TratamientoRealizado extends CActiveRecord
 {
+    
+        public $Nombre_Tratamiento;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -33,11 +35,11 @@ class TratamientoRealizado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_ficha, id_tratamiento, comentario, valor, fecha', 'required'),
+			array('id_ficha, id_tratamiento, comentario, valor, fecha, fecha_inicio, fecha_termino, estado' , 'required'),
 			array('id_ficha, id_tratamiento, valor', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_realizado, id_ficha, id_tratamiento, comentario, valor, fecha', 'safe', 'on'=>'search'),
+			array('id_realizado, id_ficha,Nombre_Tratamiento, id_tratamiento, comentario, valor, fecha, fecha_inicio, fecha_termino, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +69,9 @@ class TratamientoRealizado extends CActiveRecord
 			'comentario' => 'Comentario',
 			'valor' => 'Valor',
                         'fecha' => 'Fecha',
+                        'fecha_inicio' => 'Fecha Inicio',
+                        'fecha_termino' => 'Fecha Termino',
+                        'estado' => 'Estado',
 		);
 	}
 
@@ -87,14 +92,17 @@ class TratamientoRealizado extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with = array('idTratamiento');                
 		$criteria->compare('id_realizado',$this->id_realizado);
 		$criteria->compare('id_ficha',$this->id_ficha);
-		$criteria->compare('id_tratamiento',$this->id_tratamiento);
+		$criteria->compare('t.id_tratamiento',$this->id_tratamiento);
 		$criteria->compare('comentario',$this->comentario,true);
 		$criteria->compare('valor',$this->valor);
                 $criteria->compare('fecha', $this->fecha);
-
+                $criteria->compare('fecha_inicio', $this->fecha_inicio);
+                $criteria->compare('fecha_termino', $this->fecha_termino);
+                $criteria->compare('estado', $this->estado);
+                $criteria->compare('idTratamiento.nombre' , $this->Nombre_Tratamiento , true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -105,14 +113,17 @@ class TratamientoRealizado extends CActiveRecord
                 // @todo Please modify the following code to remove attributes that should not be searched.
 
                 $criteria=new CDbCriteria;
-
+                $criteria->with = array('idTratamiento');              
                 $criteria->compare('id_ficha',$id,true);
                 $criteria->compare('id_realizado',$this->id_realizado);
-		$criteria->compare('id_tratamiento',$this->id_tratamiento);
+		$criteria->compare('t.id_tratamiento',$this->id_tratamiento);
 		$criteria->compare('comentario',$this->comentario,true);
 		$criteria->compare('valor',$this->valor);
                 $criteria->compare('fecha', $this->fecha);
-                
+                $criteria->compare('fecha_inicio', $this->fecha_inicio);
+                $criteria->compare('fecha_termino', $this->fecha_termino);
+                $criteria->compare('estado', $this->estado);
+                $criteria->compare('idTratamiento.nombre' , $this->Nombre_Tratamiento,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

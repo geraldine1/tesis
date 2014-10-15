@@ -30,7 +30,7 @@ class PacienteController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'delete'),
+                'actions' => array('create', 'update', 'delete','odontograma', 'tratamientoPaciente','creaTratamiento'),
                 'users' => array('Dentista','Asistente'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -75,7 +75,7 @@ class PacienteController extends Controller {
             if ($model->save()){
                 //Se guarda el rut en la tabla FichaDental
                 $ficha->rut_paciente = $rut;
-                date_default_timezone_set('UTC');
+                date_default_timezone_set('Chile/Continental');
                 $ficha->fecha_creacion = date("Y-m-d"); 
                 $ficha->save();
                 //Se terminan de guardar los datos en la FichaDental
@@ -93,7 +93,7 @@ class PacienteController extends Controller {
                 $odontograma->comentario = "No existen comentarios";
                 $odontograma->save();
                 
-                $nombres = array(18,17,16,15,14,13,12,11,21,22,23,24,25,26,27,28,52,51,50,49,48,61,62,63,64,65,82,81,80,79,78,71,72,73,74,75,48,47,46,45,44,43,42,41,31,32,33,34,35,36,37,38);
+                $nombres = array(18,17,16,15,14,13,12,11,21,22,23,24,25,26,27,28,55,54,53,52,51,61,62,63,64,65,85,84,83,82,81,71,72,73,74,75,48,47,46,45,44,43,42,41,31,32,33,34,35,36,37,38);
                 
                 for($i = 0 ; $i < 52 ; $i++){
                     
@@ -103,30 +103,6 @@ class PacienteController extends Controller {
                     $pieza->imagen = "nones";
                     $pieza->save();
                     
-                    $cara = new Cara();
-                    $cara->nombre = "Cara Superior";
-                    $cara->id_pieza = $pieza->id_pieza;
-                    $cara->save();
-                    
-                    $cara2 = new Cara();
-                    $cara2->nombre = "Cara Inferior";
-                    $cara2->id_pieza = $pieza->id_pieza;
-                    $cara2->save();
-                    
-                    $cara3 = new Cara();
-                    $cara3->nombre = "Cara Derecha";
-                    $cara3->id_pieza = $pieza->id_pieza;
-                    $cara3->save();
-                    
-                    $cara4 = new Cara();
-                    $cara4->nombre = "Cara Izquierda";
-                    $cara4->id_pieza = $pieza->id_pieza;
-                    $cara4->save();
-                    
-                    $cara5 = new Cara();
-                    $cara5->nombre = "Cara Central";
-                    $cara5->id_pieza = $pieza->id_pieza;
-                    $cara5->save();
                 }
                 
                 $this->redirect(array('view', 'id' => $model->rut_paciente));
@@ -222,12 +198,32 @@ class PacienteController extends Controller {
         }
     }
     
-    public function actionMuestraFicha(){
-        $this->render('fichaPaciente');
+    public function actionOdontograma() {
+        $this->render('odontograma');
+    }
+
+    public function actionTratamientoPaciente($id) {
+        $modelTratamiento = new TratamientoRealizado('search');
+        if(isset ( $_GET ['TratamientoRealizado'] ))
+            $modelTratamiento->attributes = $_GET ['TratamientoRealizado'];
+        $this->render('tratamientoPaciente', array(
+            'model' => $this->loadModel($id),
+            'modelTratamiento' => $modelTratamiento,
+        ));
     }
     
-    public function actionFicha($rut) {
-        $this->render('view', array('localId' => $rut));
+    public function actionCreaTratamiento($id) {
+        $this->render('creaTratamiento', array(
+            'model' => $this->loadModel($id),
+        ));
     }
+    
+    /*public function actionMuestraFicha(){
+        $this->render('fichaPaciente');
+    }*/
+    
+    /*public function actionFicha($rut) {
+        $this->render('view', array('localId' => $rut));
+    }*/
 
 }

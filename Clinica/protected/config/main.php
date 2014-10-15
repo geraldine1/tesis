@@ -1,13 +1,22 @@
 <?php
-
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
+            'theme'=>'bootstrap', // requires you to copy the theme under your themes directory
+            'modules'=>array(
+                'gii'=>array(
+                     'generatorPaths'=>array(
+                         'bootstrap.gii',
+                     ),                      
+                ),  
+            ),
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Clínica Dental el Roble',
+    'language'=>'es',
 	// preloading 'log' component
 	'preload'=>array('log'),
     
@@ -31,6 +40,9 @@ return array(
 
 	// application components
 	'components'=>array(
+            'bootstrap'=>array(
+                'class'=>'bootstrap.components.Bootstrap',
+             ),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,

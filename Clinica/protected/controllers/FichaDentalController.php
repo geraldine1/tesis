@@ -177,9 +177,24 @@ class FichaDentalController extends Controller {
         $this->render('odontograma');
     }
 
-    public function actionTratamientoPaciente($id) {
+    /*public function actionTratamientoPaciente($id) {
+        $model = new TratamientoRealizado();
+        $model->unsetAttributes();
+        if (isset($_GET['TratamientoRealizado']))
+            $model->attributes = $_GET['TratamientoRealizado'];
+        
         $this->render('tratamientoPaciente', array(
             'model' => $this->loadModel($id),
+        ));
+    }*/
+    
+    public function actionTratamientoPaciente($id) {
+        $modelTratamiento = new TratamientoRealizado('search');
+        if(isset ( $_GET ['TratamientoRealizado'] ))
+            $modelTratamiento->attributes = $_GET ['TratamientoRealizado'];
+        $this->render('tratamientoPaciente', array(
+            'model' => $this->loadModel($id),
+            'modelTratamiento' => $modelTratamiento,
         ));
     }
     
