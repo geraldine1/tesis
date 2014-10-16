@@ -46,7 +46,8 @@ class Paciente extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('rut_paciente, nombre_paciente, apellidos_paciente, direccion_paciente, ciudad_paciente, telefono_paciente, correo_paciente, sexo_paciente, fecha_nac_paciente, profesion_paciente, lugar_trabajo', 'safe', 'on'=>'search'),
-		);
+                        array('rut_paciente', 'validateRut'),
+                    );
 	}
 
 	/**
@@ -94,6 +95,27 @@ class Paciente extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
+        public function validateRut($attribute, $params) {
+                $data = explode('-', $this->rut_paciente);
+                $evaluate = strrev($data[0]);
+                $multiply = 2;
+                $store = 0;
+                for ($i = 0; $i < strlen($evaluate); $i++) {
+                    $store += $evaluate[$i] * $multiply;
+                    $multiply++;
+                    if ($multiply > 7)
+                        $multiply = 2;
+                }
+                isset($data[1]) ? $verifyCode = strtolower($data[1]) : $verifyCode = '';
+                $result = 11 - ($store % 11);
+                if ($result == 10)
+                    $result = 'k';
+                if ($result == 11)
+                    $result = 0;
+                if ($verifyCode != $result)
+                    $this->addError('rut_paciente', 'Rut inválido.');
+         }
+         
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.

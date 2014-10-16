@@ -63,7 +63,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'sexo_paciente'); ?>
-		<?php echo $form->textField($model,'sexo_paciente',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model, 'sexo_paciente', array('F'=>'Femenino', 'M'=>'Masculino')); ?>
 		<?php echo $form->error($model,'sexo_paciente'); ?>
 	</div>
 
