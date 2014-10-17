@@ -8,11 +8,14 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'tratamiento-realizado-form',
+        'enableClientValidation'=>true,
+        'focus'=>array($model,'firstName'),
+        'enableAjaxValidation'=>true,
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
+	
 )); ?>
 
 	<p class="note">Campos con <span class="required">*</span> son obligatorios.</p>
@@ -42,13 +45,55 @@
         
         <div class="row">
 		<?php echo $form->labelEx($model,'fecha_inicio'); ?>
-		<?php echo $form->textField($model,'fecha_inicio'); ?>
+		 <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                'attribute'=>"fecha_inicio",
+                'model'=>$model,
+                'language'=>'es',
+                'value'=>$model->fecha_inicio,
+                'language' => 'es',
+                //'htmlOptions' => array('readonly'=>"readonly"),
+               
+                    'options'=>array(
+                        'autoSize'=>true,
+                        'buttonImage'=>Yii::app()->baseUrl.'/images/calendar.png',
+                        'buttonImageOnly'=>true,
+                        'dateFormat'=>'yy-mm-dd',
+                        'showButtonPanel'=>true,
+                        'changeMonth'=>true,
+                        'changeYear'=>true,
+                        'defaultDate'=>'+1w',
+                        'showOtherMonths'=>true,
+                        'changeMonth' => 'true',
+                        'changeYear' => 'true',
+                ),
+            ))?>
 		<?php echo $form->error($model,'fecha_inicio'); ?>
 	</div>
         
         <div class="row">
 		<?php echo $form->labelEx($model,'fecha_termino'); ?>
-		<?php echo $form->textField($model,'fecha_termino'); ?>
+		 <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                'attribute'=>"fecha_termino",
+                'model'=>$model,
+                'language'=>'es',
+                'value'=>$model->fecha_termino,
+                'language' => 'es',
+                //'htmlOptions' => array('readonly'=>"readonly"),
+               
+                    'options'=>array(
+                        'autoSize'=>true,
+                        'buttonImage'=>Yii::app()->baseUrl.'/images/calendar.png',
+                        'buttonImageOnly'=>true,
+                        'dateFormat'=>'yy-mm-dd',
+                        'showButtonPanel'=>true,
+                        'changeMonth'=>true,
+                        'changeYear'=>true,
+                        'defaultDate'=>'+1w',
+                        'showOtherMonths'=>true,
+                        'changeMonth' => 'true',
+                        'changeYear' => 'true',
+                ),
+            ))?>
 		<?php echo $form->error($model,'fecha_termino'); ?>
 	</div>
         

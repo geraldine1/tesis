@@ -8,11 +8,14 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'paciente-form',
+        'enableClientValidation'=>true,
+        'focus'=>array($model,'firstName'),
+        'enableAjaxValidation'=>true,
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
+	
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -69,7 +72,28 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha_nac_paciente'); ?>
-		<?php echo $form->textField($model,'fecha_nac_paciente'); ?>
+		<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                'attribute'=>"fecha_nac_paciente",
+                'model'=>$model,
+                'language'=>'es',
+                'value'=>$model->fecha_nac_paciente,
+                'language' => 'es',
+                'htmlOptions' => array('readonly'=>"readonly"),
+               
+                    'options'=>array(
+                        'autoSize'=>true,
+                        'buttonImage'=>Yii::app()->baseUrl.'/images/calendar.png',
+                        'buttonImageOnly'=>true,
+                        'dateFormat'=>'yy-mm-dd',
+                        'showButtonPanel'=>true,
+                        'changeMonth'=>true,
+                        'changeYear'=>true,
+                        'defaultDate'=>'+1w',
+                        'showOtherMonths'=>true,
+                        'changeMonth' => 'true',
+                        'changeYear' => 'true',
+                ),
+            ))?>
 		<?php echo $form->error($model,'fecha_nac_paciente'); ?>
 	</div>
 
