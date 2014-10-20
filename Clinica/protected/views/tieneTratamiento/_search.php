@@ -22,8 +22,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'id_cara'); ?>
-		<?php echo $form->textField($model,'id_cara'); ?>
+		<?php echo $form->label($model,'id_pieza_paciente'); ?>
+		<?php echo $form->textField($model,'id_pieza_paciente'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'comentario'); ?>
+		<?php echo $form->textArea($model,'comentario',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
 
 	<div class="row buttons">

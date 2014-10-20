@@ -23,7 +23,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'id_realizado',
 		'id_tiene_tratamiento',
-		'id_pieza',
-                'comentario',
+		'id_pieza_paciente',
+		'comentario',
 	),
 )); ?>

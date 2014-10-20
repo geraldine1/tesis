@@ -17,8 +17,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'id_ficha'); ?>
-		<?php echo $form->textField($model,'id_ficha'); ?>
+		<?php echo $form->label($model,'id_atencion'); ?>
+		<?php echo $form->textField($model,'id_atencion'); ?>
 	</div>
 
 	<div class="row">
@@ -29,11 +29,6 @@
 	<div class="row">
 		<?php echo $form->label($model,'comentario'); ?>
 		<?php echo $form->textArea($model,'comentario',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'valor'); ?>
-		<?php echo $form->textField($model,'valor'); ?>
 	</div>
 
 	<div class="row buttons">

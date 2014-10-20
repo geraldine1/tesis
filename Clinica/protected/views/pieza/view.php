@@ -22,7 +22,6 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_pieza',
-		'id_odontograma',
 		'nombre_pieza',
 		'imagen',
 	),

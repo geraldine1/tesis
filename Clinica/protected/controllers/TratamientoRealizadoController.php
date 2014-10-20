@@ -34,8 +34,8 @@ class TratamientoRealizadoController extends Controller {
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete', 'tratamientoPaciente', 'TratamientoCara', 'CargaDiente'),
-                'users' => array('Dentista', 'Asistente'),
+                'actions' => array('admin', 'delete','TratamientoCara'),
+                'users' => array('Dentista','Asistente'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -48,8 +48,10 @@ class TratamientoRealizadoController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $modelTieneTratamiento = new TieneTratamiento('search');
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'modelTieneTratamiento' => $modelTieneTratamiento,
         ));
     }
 
@@ -57,33 +59,20 @@ class TratamientoRealizadoController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($idFicha) {
+    public function actionCreate($id) {
         $model = new TratamientoRealizado;
-        $model->id_ficha = $idFicha;
-        date_default_timezone_set('UTC');
-        $fecha = date("Y-m-d");
-        $model->fecha = $fecha;
+        $model->id_atencion = $id;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['TratamientoRealizado'])) {
             $model->attributes = $_POST['TratamientoRealizado'];
-            if ($model->save()) {
-                //$this->redirect(array('view', 'id' => $model->id_realizado));
-                $this->redirect(array('TratamientoCara','id' => $model->id_realizado));
-                //$this->render('TratamientoCara', array('model_tratamiento' => $model));
-            }
-        } else {
-            $this->render('create', array(
-                'model' => $model,
-            ));
+            if ($model->save())
+                $this->redirect(array('TratamientoCara', 'id' => $model->id_realizado));
         }
-    }
 
-    public function actionCargaDiente($pieza, $model_tratamiento) {
-        $this->render('/tieneTratamiento/agregaTratamientoCara', array(
-            'model' => $model_tratamiento,
-            'numero' => $pieza,
+        $this->render('create', array(
+            'model' => $model,
         ));
     }
 
@@ -177,4 +166,3 @@ class TratamientoRealizadoController extends Controller {
     }
 
 }
-

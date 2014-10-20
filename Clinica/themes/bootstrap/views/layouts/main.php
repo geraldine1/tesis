@@ -41,7 +41,6 @@
                                 array('label'=>'Pacientes', 'url'=>array('/Paciente/index'),'visible'=>Yii::app()->user->name=='Dentista'||'Asistente'),
                                 array('label'=>'Tratamiento', 'url'=>array('/Tratamiento/index'),'visible'=>Yii::app()->user->name=='Dentista'||'Asistente'),
                                 array('label'=>'Fichas', 'url'=>array('/FichaDental/index'),'visible'=>Yii::app()->user->name=='Dentista'||'Asistente'),
-                                
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),

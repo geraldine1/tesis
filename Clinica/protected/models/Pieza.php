@@ -5,14 +5,11 @@
  *
  * The followings are the available columns in table 'pieza':
  * @property integer $id_pieza
- * @property integer $id_odontograma
  * @property string $nombre_pieza
  * @property string $imagen
  *
  * The followings are the available model relations:
- * @property Cara[] $caras
- * @property Observacion[] $observacions
- * @property Odontograma $idOdontograma
+ * @property PiezaPaciente[] $piezaPacientes
  */
 class Pieza extends CActiveRecord
 {
@@ -32,13 +29,11 @@ class Pieza extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_odontograma, nombre_pieza, imagen', 'required'),
-			array('id_odontograma', 'numerical', 'integerOnly'=>true),
-			array('nombre_pieza', 'length', 'max'=>30),
-			array('imagen', 'length', 'max'=>40),
+			array('nombre_pieza, imagen', 'required'),
+			array('nombre_pieza, imagen', 'length', 'max'=>40),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_pieza, id_odontograma, nombre_pieza, imagen', 'safe', 'on'=>'search'),
+			array('id_pieza, nombre_pieza, imagen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,9 +45,7 @@ class Pieza extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'caras' => array(self::HAS_MANY, 'Cara', 'id_pieza'),
-			'observacions' => array(self::HAS_MANY, 'Observacion', 'id_pieza'),
-			'idOdontograma' => array(self::BELONGS_TO, 'Odontograma', 'id_odontograma'),
+			'piezaPacientes' => array(self::HAS_MANY, 'PiezaPaciente', 'id_pieza'),
 		);
 	}
 
@@ -63,7 +56,6 @@ class Pieza extends CActiveRecord
 	{
 		return array(
 			'id_pieza' => 'Id Pieza',
-			'id_odontograma' => 'Id Odontograma',
 			'nombre_pieza' => 'Nombre Pieza',
 			'imagen' => 'Imagen',
 		);
@@ -88,7 +80,6 @@ class Pieza extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_pieza',$this->id_pieza);
-		$criteria->compare('id_odontograma',$this->id_odontograma);
 		$criteria->compare('nombre_pieza',$this->nombre_pieza,true);
 		$criteria->compare('imagen',$this->imagen,true);
 

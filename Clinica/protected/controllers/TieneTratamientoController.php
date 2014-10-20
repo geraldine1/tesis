@@ -60,10 +60,10 @@ class TieneTratamientoController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($id_pieza,$id_realizado)
+	public function actionCreate($id_pieza_paciente , $id_realizado)
 	{
 		$model=new TieneTratamiento;
-                $model->id_pieza = $id_pieza;
+                $model->id_pieza_paciente = $id_pieza_paciente;
                 $model->id_realizado = $id_realizado;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -72,8 +72,7 @@ class TieneTratamientoController extends Controller
 		{
 			$model->attributes=$_POST['TieneTratamiento'];
 			if($model->save())
-				//$this->redirect(array('view','id'=>$model->id_tiene_tratamiento));
-                            $this->redirect(array('tratamientoRealizado/TratamientoCara','id' => $model->id_realizado));
+				$this->redirect(array('tratamientoRealizado/TratamientoCara','id'=>$model->id_realizado));
 		}
 
 		$this->render('create',array(

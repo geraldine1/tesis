@@ -20,14 +20,8 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_odontograma'); ?>
-		<?php echo $form->textField($model,'id_odontograma'); ?>
-		<?php echo $form->error($model,'id_odontograma'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'nombre_pieza'); ?>
-		<?php echo $form->textField($model,'nombre_pieza',array('size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->textField($model,'nombre_pieza',array('size'=>40,'maxlength'=>40)); ?>
 		<?php echo $form->error($model,'nombre_pieza'); ?>
 	</div>
 
