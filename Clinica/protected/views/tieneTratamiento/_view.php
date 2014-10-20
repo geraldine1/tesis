@@ -13,12 +13,8 @@
 	<?php echo CHtml::encode($data->id_realizado); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_pieza_paciente')); ?>:</b>
-	<?php echo CHtml::encode($data->id_pieza_paciente); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('comentario')); ?>:</b>
-	<?php echo CHtml::encode($data->comentario); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id_cara')); ?>:</b>
+	<?php echo CHtml::encode($data->id_cara); ?>
 	<br />
 
 

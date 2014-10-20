@@ -30,7 +30,7 @@ class PacienteController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'delete','odontograma', 'tratamientoPaciente','creaTratamiento','atenciones'),
+                'actions' => array('create', 'update', 'delete','odontograma', 'tratamientoPaciente','creaTratamiento'),
                 'users' => array('Dentista','Asistente'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -93,11 +93,14 @@ class PacienteController extends Controller {
                 $odontograma->comentario = "No existen comentarios";
                 $odontograma->save();
                 
+                $nombres = array(18,17,16,15,14,13,12,11,21,22,23,24,25,26,27,28,55,54,53,52,51,61,62,63,64,65,85,84,83,82,81,71,72,73,74,75,48,47,46,45,44,43,42,41,31,32,33,34,35,36,37,38);
+                
                 for($i = 0 ; $i < 52 ; $i++){
                     
-                    $pieza = new PiezaPaciente();
+                    $pieza = new Pieza();
                     $pieza->id_odontograma = $odontograma->id_odontograma;
-                    $pieza->id_pieza = $i+1;
+                    $pieza->nombre_pieza = $nombres[$i];
+                    $pieza->imagen = "nones";
                     $pieza->save();
                     
                 }
@@ -108,14 +111,6 @@ class PacienteController extends Controller {
 
         $this->render('create', array(
             'model' => $model,
-        ));
-    }
-    
-    public function actionAtenciones($id){
-        $modelAtencion = new Atencion('search');
-        $this->render('listadoAtenciones',array(
-            'model' =>$this->loadModel($id),
-            'modelAtencion' => $modelAtencion,
         ));
     }
 

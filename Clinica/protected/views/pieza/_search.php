@@ -17,8 +17,13 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'id_odontograma'); ?>
+		<?php echo $form->textField($model,'id_odontograma'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'nombre_pieza'); ?>
-		<?php echo $form->textField($model,'nombre_pieza',array('size'=>40,'maxlength'=>40)); ?>
+		<?php echo $form->textField($model,'nombre_pieza',array('size'=>30,'maxlength'=>30)); ?>
 	</div>
 
 	<div class="row">

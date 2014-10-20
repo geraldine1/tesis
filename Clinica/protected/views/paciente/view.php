@@ -17,8 +17,8 @@ $this->menu = array(
     //array('label' => 'Manage Paciente', 'url' => array('admin')),
     //array('label' => 'Ficha Dental', 'url' => array('fichaDental/view&id=' . $id->id_ficha)),
     array('label' => 'Anamnesis', 'url' => array('anamnesis/view&id=' . $idanamnesis->id_anamnesis)),
-    array('label' => 'Añadir Tratamiento', 'url' => array('Atencion/create', 'idFicha'=>$id->id_ficha)),
-    array('label'=>'Tratamientos del paciente', 'url'=>array('atenciones', 'id'=>$model->rut_paciente)),
+    array('label' => 'Añadir Tratamiento', 'url' => array('tratamientoRealizado/create', 'idFicha'=>$id->id_ficha)),
+    array('label'=>'Tratamientos del paciente', 'url'=>array('tratamientoPaciente', 'id'=>$model->rut_paciente)),
     array('label' => 'Odontograma Paciente', 'url' => array('odontograma')),
 );
 ?>

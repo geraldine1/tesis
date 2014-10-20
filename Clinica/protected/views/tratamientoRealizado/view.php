@@ -22,29 +22,10 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_realizado',
-		'id_atencion',
+		'id_ficha',
 		'id_tratamiento',
 		'comentario',
+		'valor',
+                'fecha',
 	),
 )); ?>
-
-<?php
-//$tieneTratamiento = TieneTratamiento::model()->findByAttributes(array('id_realizado' => $model->id_realizado));
-$this->widget('zii.widgets.grid.CGridView', array(
-    'id' => 'PiezasAfectadas',
-    'dataProvider' => $modelTieneTratamiento->searchByTratamientoRealizado($model->id_realizado),
-    'filter' => $modelTieneTratamiento,
-    'columns' => array(
-        /*'id_atencion',
-        'fecha',
-        'fecha_inicio',
-        'fecha_termino',
-        'estado',
-        array(
-            'class' => 'CButtonColumn',
-            'template' => '{view}', // botones a mostrar
-            //'viewButtonUrl' => 'Yii::app()->createUrl("atencion/tratamientos&id=$data->id_atencion" )',
-        ),*/
-    ),
-));
-?>

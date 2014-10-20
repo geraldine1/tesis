@@ -6,12 +6,11 @@
  * The followings are the available columns in table 'tiene_tratamiento':
  * @property integer $id_realizado
  * @property integer $id_tiene_tratamiento
- * @property integer $id_pieza_paciente
- * @property string $comentario
+ * @property integer $id_cara
  *
  * The followings are the available model relations:
  * @property TratamientoRealizado $idRealizado
- * @property PiezaPaciente $idPiezaPaciente
+ * @property Cara $idCara
  */
 class TieneTratamiento extends CActiveRecord
 {
@@ -31,11 +30,11 @@ class TieneTratamiento extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_realizado, id_pieza_paciente, comentario', 'required'),
-			array('id_realizado, id_pieza_paciente', 'numerical', 'integerOnly'=>true),
+			array('id_realizado, id_pieza, comentario', 'required'),
+			array('id_realizado, id_pieza', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_realizado, id_tiene_tratamiento, id_pieza_paciente, comentario', 'safe', 'on'=>'search'),
+			array('id_realizado, id_tiene_tratamiento, id_pieza, comentario', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,7 +47,7 @@ class TieneTratamiento extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idRealizado' => array(self::BELONGS_TO, 'TratamientoRealizado', 'id_realizado'),
-			'idPiezaPaciente' => array(self::BELONGS_TO, 'PiezaPaciente', 'id_pieza_paciente'),
+			'idPieza' => array(self::BELONGS_TO, 'Pieza', 'id_pieza'),
 		);
 	}
 
@@ -60,8 +59,8 @@ class TieneTratamiento extends CActiveRecord
 		return array(
 			'id_realizado' => 'Id Realizado',
 			'id_tiene_tratamiento' => 'Id Tiene Tratamiento',
-			'id_pieza_paciente' => 'Id Pieza Paciente',
-			'comentario' => 'Comentario',
+			'id_pieza' => 'Id Pieza',
+                        'comentario' => 'Comentario',
 		);
 	}
 
@@ -85,26 +84,8 @@ class TieneTratamiento extends CActiveRecord
 
 		$criteria->compare('id_realizado',$this->id_realizado);
 		$criteria->compare('id_tiene_tratamiento',$this->id_tiene_tratamiento);
-		$criteria->compare('id_pieza_paciente',$this->id_pieza_paciente);
-		$criteria->compare('comentario',$this->comentario,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-        
-        public function searchByTratamientoRealizado($id)
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-                $criteria->with = array('idRealizado');
-                $criteria->compare('idRealizado.id_realizado',$id);
-		$criteria->compare('t.id_realizado',$this->id_realizado);
-		$criteria->compare('id_tiene_tratamiento',$this->id_tiene_tratamiento);
-		$criteria->compare('id_pieza_paciente',$this->id_pieza_paciente);
-		$criteria->compare('comentario',$this->comentario,true);
-
+		$criteria->compare('id_pieza',$this->id_pieza);
+                $criteria->compare('comentario',$this->comentario);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

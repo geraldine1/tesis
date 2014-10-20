@@ -15,23 +15,23 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos con <span class="required">*</span> son obligatorios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_realizado'); ?>
-		<?php echo $form->textField($model,'id_realizado'); ?>
-		<?php echo $form->error($model,'id_realizado'); ?>
+		<?php //echo $form->labelEx($model,'id_realizado'); ?>
+		<?php echo $form->hiddenField($model,'id_realizado'); ?>
+		<?php //echo $form->error($model,'id_realizado'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_pieza_paciente'); ?>
-		<?php echo $form->textField($model,'id_pieza_paciente'); ?>
-		<?php echo $form->error($model,'id_pieza_paciente'); ?>
+		<?php //echo $form->labelEx($model,'id_pieza'); ?>
+		<?php echo $form->hiddenField($model,'id_pieza'); ?>
+		<?php //echo $form->error($model,'id_pieza'); ?>
 	</div>
-
-	<div class="row">
+        
+        <div class="row">
 		<?php echo $form->labelEx($model,'comentario'); ?>
 		<?php echo $form->textArea($model,'comentario',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'comentario'); ?>
